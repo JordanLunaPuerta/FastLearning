@@ -1,0 +1,42 @@
+﻿@model FastLearning.Models.Tema
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            Curso
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Curso.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.id }) |
+    @Html.ActionLink("Regresar a lista", "Index")
+</p>

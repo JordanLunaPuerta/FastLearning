@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FastLearningDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Clase">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_habilidad" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Name="dia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="hora_inicial" Type="DateTime" Precision="3" />
+    <Property Name="hora_final" Type="DateTime" Precision="3" />
+    <Property Name="fecha_inicial" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_final" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="vacantes" Type="Int32" Nullable="false" />
+    <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+    <Property Name="id_estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Estado" Relationship="Self.FK_Clase_Estado" FromRole="Clase" ToRole="Estado" />
+    <NavigationProperty Name="Habilidad" Relationship="Self.FK_Clase_Habilidad" FromRole="Clase" ToRole="Habilidad" />
+    <NavigationProperty Name="ClaseUsuario" Relationship="Self.FK_ClaseUsuario_Clase" FromRole="Clase" ToRole="ClaseUsuario" />
+    <NavigationProperty Name="Pago" Relationship="Self.FK_Pago_Clase" FromRole="Clase" ToRole="Pago" />
+  </EntityType>
+  <EntityType Name="Curso">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Tema" Relationship="Self.FK_Tema_Curso" FromRole="Curso" ToRole="Tema" />
+  </EntityType>
+  <EntityType Name="Descuento">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numero" Type="Decimal" Precision="3" Scale="2" Nullable="false" />
+    <Property Name="valor" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DescuentoUsuario" Relationship="Self.FK_DescuentoUsuario_Descuento" FromRole="Descuento" ToRole="DescuentoUsuario" />
+  </EntityType>
+  <EntityType Name="DescuentoUsuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_descuento" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Descuento" Relationship="Self.FK_DescuentoUsuario_Descuento" FromRole="DescuentoUsuario" ToRole="Descuento" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_DescuentoUsuario_Usuario" FromRole="DescuentoUsuario" ToRole="Usuario" />
+    <NavigationProperty Name="Pago" Relationship="Self.FK_Pago_DescuentoUsuario" FromRole="DescuentoUsuario" ToRole="Pago" />
+  </EntityType>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Clase" Relationship="Self.FK_Clase_Estado" FromRole="Estado" ToRole="Clase" />
+  </EntityType>
+  <EntityType Name="Habilidad">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_tema" Type="Int32" Nullable="false" />
+    <Property Name="id_nivel" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Clase" Relationship="Self.FK_Clase_Habilidad" FromRole="Habilidad" ToRole="Clase" />
+    <NavigationProperty Name="Nivel" Relationship="Self.FK_Habilidad_Nivel" FromRole="Habilidad" ToRole="Nivel" />
+    <NavigationProperty Name="Tema" Relationship="Self.FK_Habilidad_Tema" FromRole="Habilidad" ToRole="Tema" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Habilidad_Usuario" FromRole="Habilidad" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Nivel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Habilidad" Relationship="Self.FK_Habilidad_Nivel" FromRole="Nivel" ToRole="Habilidad" />
+  </EntityType>
+  <EntityType Name="Pago">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_clase" Type="Int32" Nullable="false" />
+    <Property Name="id_descuento_usuario" Type="Int32" />
+    <Property Name="monto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Clase" Relationship="Self.FK_Pago_Clase" FromRole="Pago" ToRole="Clase" />
+    <NavigationProperty Name="DescuentoUsuario" Relationship="Self.FK_Pago_DescuentoUsuario" FromRole="Pago" ToRole="DescuentoUsuario" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Pago_Usuario" FromRole="Pago" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Solicitud">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Solicitud_Usuario" FromRole="Solicitud" ToRole="Usuario" />
+    <NavigationProperty Name="SolicitudUsuario" Relationship="Self.FK_SolicitudUsuario_Solicitud" FromRole="Solicitud" ToRole="SolicitudUsuario" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tema">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Name="id_curso" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Curso" Relationship="Self.FK_Tema_Curso" FromRole="Tema" ToRole="Curso" />
+    <NavigationProperty Name="Habilidad" Relationship="Self.FK_Habilidad_Tema" FromRole="Tema" ToRole="Habilidad" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+    <Property Name="rol" Type="Int32" Nullable="false" />
+    <Property Name="calificacion_alumno" Type="Int32" Nullable="false" />
+    <Property Name="calificacion_profesor" Type="Int32" Nullable="false" />
+    <Property Name="puntos" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DescuentoUsuario" Relationship="Self.FK_DescuentoUsuario_Usuario" FromRole="Usuario" ToRole="DescuentoUsuario" />
+    <NavigationProperty Name="Habilidad" Relationship="Self.FK_Habilidad_Usuario" FromRole="Usuario" ToRole="Habilidad" />
+    <NavigationProperty Name="Pago" Relationship="Self.FK_Pago_Usuario" FromRole="Usuario" ToRole="Pago" />
+    <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Usuario" FromRole="Usuario" ToRole="Solicitud" />
+    <NavigationProperty Name="ClaseUsuario" Relationship="Self.FK_ClaseUsuario_Usuario" FromRole="Usuario" ToRole="ClaseUsuario" />
+    <NavigationProperty Name="SolicitudUsuario" Relationship="Self.FK_SolicitudUsuario_Usuario" FromRole="Usuario" ToRole="SolicitudUsuario" />
+  </EntityType>
+  <EntityType Name="ClaseUsuario">
+    <Key>
+      <PropertyRef Name="id_clase" />
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_clase" Type="Int32" Nullable="false" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="calificacion_alumno" Type="Int32" />
+    <Property Name="calificacion_profesor" Type="Int32" />
+    <NavigationProperty Name="Clase" Relationship="Self.FK_ClaseUsuario_Clase" FromRole="ClaseUsuario" ToRole="Clase" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_ClaseUsuario_Usuario" FromRole="ClaseUsuario" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="SolicitudUsuario">
+    <Key>
+      <PropertyRef Name="id_solicitud" />
+      <PropertyRef Name="id_usuario" />
+      <PropertyRef Name="descripcion" />
+    </Key>
+    <Property Name="id_solicitud" Type="Int32" Nullable="false" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Solicitud" Relationship="Self.FK_SolicitudUsuario_Solicitud" FromRole="SolicitudUsuario" ToRole="Solicitud" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_SolicitudUsuario_Usuario" FromRole="SolicitudUsuario" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_Clase_Estado">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+    <End Role="Clase" Type="Self.Clase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Clase">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clase_Habilidad">
+    <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="1" />
+    <End Role="Clase" Type="Self.Clase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Habilidad">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Clase">
+        <PropertyRef Name="id_habilidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClaseUsuario_Clase">
+    <End Role="Clase" Type="Self.Clase" Multiplicity="1" />
+    <End Role="ClaseUsuario" Type="Self.ClaseUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clase">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ClaseUsuario">
+        <PropertyRef Name="id_clase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pago_Clase">
+    <End Role="Clase" Type="Self.Clase" Multiplicity="1" />
+    <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clase">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Pago">
+        <PropertyRef Name="id_clase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tema_Curso">
+    <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+    <End Role="Tema" Type="Self.Tema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tema">
+        <PropertyRef Name="id_curso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DescuentoUsuario_Descuento">
+    <End Role="Descuento" Type="Self.Descuento" Multiplicity="1" />
+    <End Role="DescuentoUsuario" Type="Self.DescuentoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Descuento">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DescuentoUsuario">
+        <PropertyRef Name="id_descuento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DescuentoUsuario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="DescuentoUsuario" Type="Self.DescuentoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DescuentoUsuario">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pago_DescuentoUsuario">
+    <End Role="DescuentoUsuario" Type="Self.DescuentoUsuario" Multiplicity="0..1" />
+    <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DescuentoUsuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Pago">
+        <PropertyRef Name="id_descuento_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Habilidad_Nivel">
+    <End Role="Nivel" Type="Self.Nivel" Multiplicity="1" />
+    <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nivel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Habilidad">
+        <PropertyRef Name="id_nivel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Habilidad_Tema">
+    <End Role="Tema" Type="Self.Tema" Multiplicity="1" />
+    <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tema">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Habilidad">
+        <PropertyRef Name="id_tema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Habilidad_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Habilidad" Type="Self.Habilidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Habilidad">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pago_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Pago">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Solicitud_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Solicitud">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudUsuario_Solicitud">
+    <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="1" />
+    <End Role="SolicitudUsuario" Type="Self.SolicitudUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Solicitud">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SolicitudUsuario">
+        <PropertyRef Name="id_solicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClaseUsuario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="ClaseUsuario" Type="Self.ClaseUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ClaseUsuario">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudUsuario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="SolicitudUsuario" Type="Self.SolicitudUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SolicitudUsuario">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FastLearningDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clase" EntityType="Self.Clase" />
+    <EntitySet Name="Curso" EntityType="Self.Curso" />
+    <EntitySet Name="Descuento" EntityType="Self.Descuento" />
+    <EntitySet Name="DescuentoUsuario" EntityType="Self.DescuentoUsuario" />
+    <EntitySet Name="Estado" EntityType="Self.Estado" />
+    <EntitySet Name="Habilidad" EntityType="Self.Habilidad" />
+    <EntitySet Name="Nivel" EntityType="Self.Nivel" />
+    <EntitySet Name="Pago" EntityType="Self.Pago" />
+    <EntitySet Name="Solicitud" EntityType="Self.Solicitud" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Tema" EntityType="Self.Tema" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="ClaseUsuario" EntityType="Self.ClaseUsuario" />
+    <EntitySet Name="SolicitudUsuario" EntityType="Self.SolicitudUsuario" />
+    <AssociationSet Name="FK_Clase_Estado" Association="Self.FK_Clase_Estado">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Clase" EntitySet="Clase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clase_Habilidad" Association="Self.FK_Clase_Habilidad">
+      <End Role="Habilidad" EntitySet="Habilidad" />
+      <End Role="Clase" EntitySet="Clase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClaseUsuario_Clase" Association="Self.FK_ClaseUsuario_Clase">
+      <End Role="Clase" EntitySet="Clase" />
+      <End Role="ClaseUsuario" EntitySet="ClaseUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pago_Clase" Association="Self.FK_Pago_Clase">
+      <End Role="Clase" EntitySet="Clase" />
+      <End Role="Pago" EntitySet="Pago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tema_Curso" Association="Self.FK_Tema_Curso">
+      <End Role="Curso" EntitySet="Curso" />
+      <End Role="Tema" EntitySet="Tema" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DescuentoUsuario_Descuento" Association="Self.FK_DescuentoUsuario_Descuento">
+      <End Role="Descuento" EntitySet="Descuento" />
+      <End Role="DescuentoUsuario" EntitySet="DescuentoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DescuentoUsuario_Usuario" Association="Self.FK_DescuentoUsuario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="DescuentoUsuario" EntitySet="DescuentoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pago_DescuentoUsuario" Association="Self.FK_Pago_DescuentoUsuario">
+      <End Role="DescuentoUsuario" EntitySet="DescuentoUsuario" />
+      <End Role="Pago" EntitySet="Pago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Habilidad_Nivel" Association="Self.FK_Habilidad_Nivel">
+      <End Role="Nivel" EntitySet="Nivel" />
+      <End Role="Habilidad" EntitySet="Habilidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Habilidad_Tema" Association="Self.FK_Habilidad_Tema">
+      <End Role="Tema" EntitySet="Tema" />
+      <End Role="Habilidad" EntitySet="Habilidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Habilidad_Usuario" Association="Self.FK_Habilidad_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Habilidad" EntitySet="Habilidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pago_Usuario" Association="Self.FK_Pago_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Pago" EntitySet="Pago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Solicitud_Usuario" Association="Self.FK_Solicitud_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Solicitud" EntitySet="Solicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudUsuario_Solicitud" Association="Self.FK_SolicitudUsuario_Solicitud">
+      <End Role="Solicitud" EntitySet="Solicitud" />
+      <End Role="SolicitudUsuario" EntitySet="SolicitudUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClaseUsuario_Usuario" Association="Self.FK_ClaseUsuario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="ClaseUsuario" EntitySet="ClaseUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudUsuario_Usuario" Association="Self.FK_SolicitudUsuario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="SolicitudUsuario" EntitySet="SolicitudUsuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

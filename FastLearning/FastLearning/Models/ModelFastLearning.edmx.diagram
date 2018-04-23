@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c3d665c48724d92819d2b77ce26b813" Name="Diagram1">
+        <EntityTypeShape EntityType="FastLearningDBModel.Clase" Width="1.5" PointX="11.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Curso" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Descuento" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.DescuentoUsuario" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Estado" Width="1.5" PointX="9" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Habilidad" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Nivel" Width="1.5" PointX="3.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Pago" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Solicitud" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Tema" Width="1.5" PointX="3.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.Usuario" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.ClaseUsuario" Width="1.5" PointX="13.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FastLearningDBModel.SolicitudUsuario" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Clase_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Clase_Habilidad" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_ClaseUsuario_Clase" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Pago_Clase" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Tema_Curso" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_DescuentoUsuario_Descuento" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_DescuentoUsuario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Pago_DescuentoUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Habilidad_Nivel" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Habilidad_Tema" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Habilidad_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Pago_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_Solicitud_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_SolicitudUsuario_Solicitud" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_ClaseUsuario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FastLearningDBModel.FK_SolicitudUsuario_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

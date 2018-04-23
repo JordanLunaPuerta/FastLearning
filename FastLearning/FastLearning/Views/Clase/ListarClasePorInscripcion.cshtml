@@ -1,0 +1,38 @@
+﻿@model IEnumerable<FastLearning.Models.ClaseUsuario>
+
+@{
+    ViewBag.Title = "ListarClasePorInscripcion";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<h2>Mis clases inscritas</h2>
+<h1 class="col-md-12"></h1>
+<p>
+    @Html.ActionLink("Mis clases creadas", "ListarClasePorUsuario")
+</p>
+<h1 class="col-md-12"></h1>
+<div class="container col-md-12">
+    @foreach (var item in Model)
+    {
+        <div class="card col-md-4 table-bordered" style="width: 36rem; height:auto;background-color:aliceblue">
+            <div class="card-body">
+                <h5 class="card-title"><b><big>@Html.DisplayFor(modelItem => item.Clase.Habilidad.Tema.nombre)</big></b></h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Clase.descripcion)</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Dia: @Html.DisplayFor(modelItem => item.Clase.dia)</li>
+                    <li class="list-group-item">Hora inicial: @Html.DisplayFor(modelItem => item.Clase.hora_inicial)</li>
+                    <li class="list-group-item">Hora final: @Html.DisplayFor(modelItem => item.Clase.hora_final)</li>
+                    <li class="list-group-item">Hora inicial: @Html.DisplayFor(modelItem => item.Clase.fecha_inicial)</li>
+                    <li class="list-group-item">Fecha de inicio: @Html.DisplayFor(modelItem => item.Clase.fecha_final)</li>
+                    <li class="list-group-item">Fecha de fin: @Html.DisplayFor(modelItem => item.Clase.fecha_registro)</li>
+                    <li class="list-group-item">Precio: @Html.DisplayFor(modelItem => item.Clase.precio)</li>
+                    <li class="list-group-item">Vacantes: @Html.DisplayFor(modelItem => item.Clase.vacantes)</li>
+                    <li class="list-group-item">Inscritos: @Html.DisplayFor(modelItem => item.Clase.ClaseUsuario.Count)</li>
+                </ul>
+                <button type="button" class="btn btn-default">Calificar profesor</button>
+                <h1></h1>
+            </div>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,46 @@
+﻿@model FastLearning.Models.Solicitud
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Estas seguro de eliminar esta solicitud?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Título:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            Descripción:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            Fecha de registro:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_registro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        <div class="form-actions no-color">
+            @Html.ActionLink("Regresar a mis solicitudes ","ListarSolicitudPorUsuario")
+            <input type="submit" value="Eliminar" class="btn btn-primary" /> 
+        </div>
+    }
+</div>

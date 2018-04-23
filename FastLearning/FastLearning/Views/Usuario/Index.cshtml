@@ -1,0 +1,86 @@
+﻿@model IEnumerable<FastLearning.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de usuarios</h2>
+
+<p>
+
+</p>
+<div class="container col-md-12">
+    <table class="table col-md-12 table-bordered">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th>
+                    Nombres
+                </th>
+                <th>
+                    Apellidos
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Contrasena
+                </th>
+                <th>
+                    Calificación alumno
+                </th>
+                <th>
+                    Calificación profesor
+                </th>
+                <th>
+                    Puntos
+                </th>
+                <th>
+                    Habilidades
+                </th>
+                <th>
+                    Solicitudes
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody style="background-color:white">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.contrasena)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.calificacion_alumno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.calificacion_profesor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.puntos)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ver", "ListarHabilidadPorUsuario", new { id = item.id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ver", "ListarSolicitudPorUsuario", new { id = item.id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Editar", new { id = item.id }) |
+                        @Html.ActionLink("Detalles", "Detalles", new { id = item.id })
+                    </td>
+                </tr>
+        }
+        </tbody>
+    </table>
+</div>
