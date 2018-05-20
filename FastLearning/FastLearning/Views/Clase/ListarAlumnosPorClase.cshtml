@@ -1,0 +1,37 @@
+﻿@model IEnumerable<FastLearning.Models.ClaseUsuario>
+
+@{
+    ViewBag.Title = "ListarAlumnosPorClase";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<h2 style="text-align:center; font-weight:bold">Lista de Alumnos</h2>
+
+<div class="table-responsive container col-md-12">
+    <table class="table col-md-12">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th>Alumno</th>
+                <th>Calificación de perfil</th>
+            </tr>
+        </thead>
+        <tbody style="background-color:white">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.nombres) @Html.DisplayFor(modelItem => item.Usuario.apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.calificacion_alumno)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<h1 class="col-md-12"></h1>
+<div>
+    <button type="button" class="btn btn-default">@Html.ActionLink("Regresar a mis clases", "ListarClasePorUsuario")</button>
+</div>
+

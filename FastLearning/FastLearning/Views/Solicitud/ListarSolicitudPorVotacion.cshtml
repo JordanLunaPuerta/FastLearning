@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FastLearning.Models.SolicitudUsuario>
+
+@{
+    ViewBag.Title = "ListarSolicitudPorVotacion";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<h2 style="font-weight:bold">Mis solicitudes votadas</h2>
+<h1 class="col-md-12"></h1>
+<p>
+    <button type="submit" class="btn btn-default">@Html.ActionLink("Mis solicitudes creadas", "ListarSolicitudPorUsuario")</button>
+</p>
+<h1 class="col-md-12"></h1>
+<div class="container col-md-12">
+    @foreach (var item in Model)
+    {
+    <div class="card col-md-4 table-bordered" style="width: 36rem; height:32rem;background-color:aliceblue">
+        <div class="card-body">
+            <h5 class="card-title" style="word-wrap: break-word"><b><big>@Html.DisplayFor(modelItem => item.Solicitud.nombre)</big></b></h5>
+            <h6 class="card-subtitle mb-2 text-muted" style="word-wrap: break-word">@Html.DisplayFor(modelItem => item.Solicitud.descripcion)</h6>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Solicitante: @Html.DisplayFor(modelItem => item.Solicitud.Usuario.nombres) @Html.DisplayFor(modelItem => item.Solicitud.Usuario.apellidos)</li>
+                <li class="list-group-item">Fecha de registro: @Html.DisplayFor(modelItem => item.fecha_registro)</li>
+                <li class="list-group-item">Número de votos: @Html.DisplayFor(modelItem => item.Solicitud.SolicitudUsuario.Count)</li>
+                @{if (item.Solicitud.estado == 1) { ViewBag.Estado = "No Revisado"; } else { ViewBag.Estado = "Aprobado"; }}
+                <li class="list-group-item">Estado: @ViewBag.Estado</li>
+            </ul>
+            <button type="button" class="btn btn-default">@Html.ActionLink("Votantes", "ListarVotantesPorSolicitudVotada", new { id = item.Solicitud.id })</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal_@item.Solicitud.id">
+                Eliminar Voto
+            </button>
+            <div class="modal fade" id="exampleModal_@item.Solicitud.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Voto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro de eliminar su voto?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-default">@Html.ActionLink("Eliminar voto", "EliminarVoto", new { id = item.Solicitud.id })</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h1></h1>
+        </div>
+    </div>
+    }
+</div>

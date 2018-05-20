@@ -1,0 +1,67 @@
+﻿@model FastLearning.Models.Usuario
+@{
+    ViewBag.Title = "RecuperarContrasena";
+    Layout = "~/Views/Shared/_LayoutInicio.cshtml";
+}
+
+<h1 class="col-md-12"></h1>
+<h2 style="font-weight:bold; text-align:center">Recuperar contraseña</h2>
+<h1 class="col-md-12"></h1>
+<div class="container col-xs-12 col-md-offset-3 col-md-6">
+    <div class="card table-bordered" style="width: auto; height:auto;background-color:aliceblue">
+        <div class="card-body col-md-offset-1" style="padding-left:1rem">
+            @using (Html.BeginForm())
+            {
+                <h1 class="col-md-12"></h1>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Email:</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.email, new { @class = "form-control", @type = "email", @required = "true" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            @*<input type="submit" value="Enviar" class="btn btn-primary" />*@
+                            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Enviar
+                            </button>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Está seguro de enviar el mensaje a este correo?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <h4 class="text-success" style="font-weight:bold">@ViewBag.Correo</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+            <h1 class="col-md-12"></h1>
+            <div>
+                ¿No tiene una cuenta? Registrese @Html.ActionLink("aquí", "RegistrarUsuario")
+            </div>
+            <h1 class="col-md-12"></h1>
+        </div>
+    </div>
+</div>
+
