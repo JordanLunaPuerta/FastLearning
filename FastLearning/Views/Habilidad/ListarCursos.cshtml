@@ -1,0 +1,8 @@
+﻿@model IEnumerable<FastLearning.Models.Curso>
+
+<select class="form-control" id="id_curso" name="id_curso">
+    @foreach (var item in Model)
+    {
+        <option value="@item.id">@item.nombre</option>
+    }
+</select>
