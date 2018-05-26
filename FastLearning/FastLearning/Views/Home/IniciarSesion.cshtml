@@ -1,0 +1,59 @@
+﻿@model FastLearning.Models.Usuario
+@{
+    /**/
+
+    ViewBag.Title = "IniciarSesion";
+    Layout = "~/Views/Shared/_LayoutInicio.cshtml";
+}
+<h1 class="col-md-12"></h1>
+<h2 style="font-weight:bold; text-align:center">Iniciar Sesión</h2>
+<h1 class="col-md-12"></h1>
+<div class="container col-xs-12 col-md-offset-3 col-md-6">
+    <div class="card table-bordered" style="width: auto; height:auto;background-color:aliceblue">
+        <div class="card-body col-md-offset-1" style="padding-left:1rem">
+            @using (Html.BeginForm())
+            {
+                <h1 class="col-md-12"></h1>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Email:</label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(m => m.email, new { @class = "form-control", @type = "email", @required = "true" })
+                            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Contraseña:</label>
+                        <div class="col-md-9">
+                            @Html.PasswordFor(m => m.contrasena, new { @class = "form-control", @required = "true" })
+                            @Html.ValidationMessageFor(m => m.contrasena, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" value="Iniciar Sesión" class="btn btn-primary" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <h4 class="text-success" style="font-weight:bold">@ViewBag.NoValido</h4>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <h1 class="col-md-12"></h1>
+            <div>
+                ¿No tiene una cuenta? Registrese @Html.ActionLink("aquí", "RegistrarUsuario")
+            </div>
+            <div>
+                @Html.ActionLink("¿Olvidaste tu contraseña?", "RecuperarContrasena")
+            </div>
+            <h1 class="col-md-12"></h1>
+        </div>
+    </div>
+</div>
