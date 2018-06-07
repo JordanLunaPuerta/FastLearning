@@ -1,0 +1,35 @@
+﻿@model List<FastLearning.Models.ClaseUsuario>
+@using (Html.BeginForm())
+{   
+    <table class="table">
+        <tr>
+            <th>
+                Alumno
+            </th>
+            <th>
+                Nota
+            </th>
+        </tr>
+        @if (Model != null)
+        {
+            int j = 0;
+            foreach (var i in Model)
+            {
+                @Html.HiddenFor(a => a[j].id_usuario)
+                @Html.HiddenFor(a => a[j].id_clase)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <tr>
+                    <td>
+                        @Html.DisplayFor(a => a[j].Usuario.nombres, new { htmlAttributes = new { @class = "form-control" } }) @Html.DisplayFor(a => a[j].Usuario.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                    <td>
+                        @Html.EditorFor(a => a[j].calificacion_alumno, new { htmlAttributes = new { @class = "form-control", min = "1", max = "10", @required = "true" } })
+                        @Html.ValidationMessageFor(a => a[j].calificacion_alumno, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                j++;
+            }
+        }
+    </table>
+    <input class="btn btn-primary" type="submit" value="Calificar" />
+}

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body style="background-color:lightcyan">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:darkblue">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Hola Admin!", "Index", "Usuario", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>
+                    <li>@Html.ActionLink("Cursos", "Index", "Curso")</li>
+                    <li>@Html.ActionLink("Temas", "Index", "Tema")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:darkblue">
+                            Solicitudes<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li class="dropdown-item">@Html.ActionLink("Solicitudes pendientes", "ListarSolicitudPendientes", "Solicitud")</li>
+                            <li class="dropdown-item">@Html.ActionLink("Solicitudes aprobadas", "ListarSolicitudAprobadas", "Solicitud")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Descuentos", "Index", "Descuento")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown-item"><a href="#" data-toggle="modal" data-target="#cerrarSesionModal">Cerrar Sesion</a></li>
+                </ul>
+                <div class="modal fade" id="cerrarSesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:darkblue">
+                                <h5 class="modal-title col-md-11" id="exampleModalLabel" style="text-align:initial;color:white">Cerrar sesión</h5>
+                                <button type="button" class="close col-md-1" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color:white">&times;</span>
+                                </button>
+                                <br />
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro de cerrar sesión?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary" onclick="location.href='@Url.Action("CerrarSesion","Home")'">Cerrar Sesión</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr class="col-md-12" />
+        <footer class="col-md-12">
+            <p class="col-md-12">&copy; @DateTime.Now.Year - FastLearning</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

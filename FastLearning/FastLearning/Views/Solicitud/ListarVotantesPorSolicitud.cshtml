@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FastLearning.Models.SolicitudUsuario>
+
+@{
+    ViewBag.Title = "Lista Votantes";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<h2 style="font-weight:bold">Lista de usuarios votantes</h2>
+<h1 class="col-md-12"></h1>
+<div class=" table-responsive container col-md-12">
+    <table class="table col-md-12 table-bordered">
+        <thead style="background-color:#EBF5FB">
+            <tr>
+                <th>Usuario</th>
+                <th>Calificación de alumno</th>
+                <th>Comentario</th>
+                <th>Fecha de registro</th>
+            </tr>
+        </thead>
+        <tbody style="background-color:white">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.nombres) @Html.DisplayFor(modelItem => item.Usuario.apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.calificacion_alumno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha_registro)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<h1 class="col-md-12"></h1>
+<div>
+    <button class="btn btn-default" onclick="location.href='@Url.Action("ListarSolicitudPorUsuario","Solicitud")'">Regresar a mis solicitudes</button>
+</div>

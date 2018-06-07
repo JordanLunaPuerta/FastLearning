@@ -1,0 +1,65 @@
+﻿@model FastLearning.Models.ClaseUsuario
+<hr />
+@using (Html.BeginForm())
+{   
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Nombres:</label>
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.Usuario.nombres, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Apellidos:</label>
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.Usuario.apellidos, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Clase:</label>
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.Clase.Habilidad.Tema.nombre, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Profesor:</label>
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.Clase.Habilidad.Usuario.nombres, new { htmlAttributes = new { @class = "form-control" } })
+                 @Html.DisplayFor(model => model.Clase.Habilidad.Usuario.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">Fecha de inscripción:</label>
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.Pago.fecha_registro, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Monto inicial:</label>
+            <div class="col-md-8">
+                S/ @Html.DisplayFor(model => model.Pago.monto_inicial, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+        </div> 
+        
+        <div class="form-group">
+            <label class="control-label col-md-4">Descuento:</label>
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.Pago.DescuentoUsuario.Descuento.nombre, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Monto final:</label>
+            <div class="col-md-8">
+                S/ @Html.DisplayFor(model => model.Pago.monto_final, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>       
+    </div>
+}
+<hr />
