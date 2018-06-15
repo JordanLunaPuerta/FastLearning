@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FastLearning.Models.Solicitud>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<h2 style="color:white">Lista de solicitudes</h2>
+
+<div class="container col-md-12">
+    @using (Html.BeginForm())
+    {
+        <p>
+            <h4 class="col-md-2" style="color:white">Buscar Solicitudes:</h4>
+            <input type="text" class="form-control col-md-3" name="buscar" />
+            @*<div class="col-md-3">@Html.TextBox("buscar", "", new { @class = "form-control" })</div>*@
+            <button type="submit" class="btn btn-primary col-md-1">Buscar</button>
+        </p>
+    }
+</div>
+<h1 class="col-md-12"></h1>
+<div class="container col-md-12">
+    @foreach (var item in Model)
+    {
+        <div class="card col-md-4 table-bordered" style="width: 36rem; height:32rem;;background: rgba(255, 255, 255, 0.80);border-color:darkturquoise">
+            <div class="card-body">
+                <h5 class="card-title" style="word-wrap: break-word"><b><big>@Html.DisplayFor(modelItem => item.nombre)</big></b></h5>
+                <h6 class="card-subtitle mb-2 text-muted" style="word-wrap: break-word">@Html.DisplayFor(modelItem => item.descripcion)</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Solicitante: @Html.DisplayFor(modelItem => item.Usuario.nombres) @Html.DisplayFor(modelItem => item.Usuario.apellidos)</li>
+                    <li class="list-group-item">Fecha de registro: @Html.DisplayFor(modelItem => item.fecha_registro)</li>
+                    <li class="list-group-item">Número de votos: @Html.DisplayFor(modelItem => item.SolicitudUsuario.Count)</li>
+                </ul>
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("VotarPorSolicitud","Solicitud", new { id = item.id })'">Votar</button>
+            </div>
+        </div>
+    }
+</div>
+<h1 class="col-md-12"></h1>

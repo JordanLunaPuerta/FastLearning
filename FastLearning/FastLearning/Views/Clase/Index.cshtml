@@ -1,0 +1,69 @@
+﻿@model PagedList.IPagedList<FastLearning.Models.Clase>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+
+<h2 style="color:white" " >Lista de clases disponibles</h2>
+
+<div class="container col-md-12">
+    @using (Html.BeginForm())
+    {
+        <p>
+            <h4 class="col-md-2" style="color:white">Buscar Clases :</h4>
+            @*<input type="text" class="form-control col-md-3" name="buscar" />*@
+            <div class="col-md-3">@Html.TextBox("buscar", ViewBag.CurrentFilter as string, new { @class = "form-control" })</div>
+            <button type="submit" class="btn btn-default col-md-1">Buscar</button>
+        </p>
+    }
+</div>
+<h1 class="col-md-12"></h1>
+<div class="container col-md-12">
+    @foreach (var item in Model)
+    {
+        <div class="card col-md-4 col-xs-12 table-bordered " style="width: 36rem; height:auto;background: rgba(255, 255, 255, 0.80);border-color:darkturquoise">
+            <div class="card-body">
+                <h5 class="card-title" style="word-wrap: break-word; text-align:center"><b><big>@Html.DisplayFor(modelItem => item.Habilidad.Tema.nombre)</big></b></h5>
+                <h6 class="card-subtitle mb-2 text-muted" style="text-align:center">
+                    <a href="#" class="perfilProfesor" data-toggle="modal" data-target="#myModal" data-id="@item.Habilidad.Usuario.id">@Html.DisplayFor(modelItem => item.Habilidad.Usuario.nombres) @Html.DisplayFor(modelItem => item.Habilidad.Usuario.apellidos)</a>
+                </h6>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color:darkblue">
+                                <h5 class="modal-title col-md-11" id="myModalLabel" style="color:white">Calificar Alumnos</h5>
+                                <button type="button" class="close col-md-1" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color:white">&times;</span>
+                                </button>
+                                <br />
+                            </div>
+                            <div class="modal-body">
+                                <div id="modal-content-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Dia: @Html.DisplayFor(modelItem => item.dia)</li>
+                    <li class="list-group-item">Hora inicial: @Html.DisplayFor(modelItem => item.hora_inicial)</li>
+                    <li class="list-group-item">Hora final: @Html.DisplayFor(modelItem => item.hora_final)</li>
+                    <li class="list-group-item">Fecha inicial: @Html.DisplayFor(modelItem => item.fecha_inicial)</li>
+                    <li class="list-group-item">Fecha final: @Html.DisplayFor(modelItem => item.fecha_final)</li>
+                    <li class="list-group-item">Precio: S/ @Html.DisplayFor(modelItem => item.precio)</li>
+                    <li class="list-group-item">Vacantes: @Html.DisplayFor(modelItem => item.vacantes)</li>
+                    <li class="list-group-item">Inscritos: @Html.DisplayFor(modelItem => item.ClaseUsuario.Count)</li>
+                </ul>
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("Detalles","Clase", new { id = item.id })'">Ver Detalles</button>
+                <h1></h1>
+            </div>
+        </div>
+    }
+    <h1 class="col-md-12"></h1>
+    <p style="color:white">Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount</p>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+</div>
+<h1 class="col-md-12"></h1>
+<script src="~/Scripts/PerfilProfesor/perfil-profesor.js"></script>

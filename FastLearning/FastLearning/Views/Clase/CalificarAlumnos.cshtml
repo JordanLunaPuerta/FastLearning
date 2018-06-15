@@ -1,0 +1,57 @@
+﻿@model List<FastLearning.Models.ClaseUsuario>
+<hr />
+@using (Html.BeginForm())
+{
+<div class="table-responsive">
+    <table class="table">
+        <thead style="background-color:#EBF5FB">
+            <tr>
+                <th>
+                    Alumno
+                </th>
+                <th>
+                    Foto
+                </th>
+                <th>
+                    Correo
+                </th>
+                <th>
+                    Nota
+                </th>
+            </tr>
+        </thead>
+        <tbody style="background-color:white">
+            @if (Model != null)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+                    @Html.HiddenFor(a => a[j].id_usuario)
+                    @Html.HiddenFor(a => a[j].id_clase)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(a => a[j].Usuario.nombres, new { htmlAttributes = new { @class = "form-control" } }) @Html.DisplayFor(a => a[j].Usuario.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+
+                            <img src="@Html.DisplayFor(a => a[j].Usuario.foto)" class="img-responsive" width="60" height="60">
+                        </td>
+                        <td>
+                            @Html.DisplayFor(a => a[j].Usuario.email, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                            @Html.EditorFor(a => a[j].calificacion_alumno, new { htmlAttributes = new { @class = "form-control", min = "1", max = "10"} })
+                            @Html.ValidationMessageFor(a => a[j].calificacion_alumno, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    j++;
+                }
+            }
+        </tbody>
+    </table>
+    <hr />
+    <input class="btn btn-primary" type="submit" value="Calificar" />
+
+</div>
+}

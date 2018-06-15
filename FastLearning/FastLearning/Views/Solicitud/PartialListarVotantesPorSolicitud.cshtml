@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FastLearning.Models.SolicitudUsuario>
+<div class=" table-responsive " style="padding-top:2rem">
+    <table class="table col-md-12 table-bordered">
+        <thead style="background: rgba(255, 255, 255, 0.80);border-color:darkturquoise">
+            <tr>
+                <th>Usuario</th>
+                <th>Foto</th>
+                <th>Calificación de alumno</th>
+                <th>Comentario</th>
+                <th>Fecha de registro</th>
+            </tr>
+        </thead>
+        <tbody style="background-color:white">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.nombres) @Html.DisplayFor(modelItem => item.Usuario.apellidos)
+                    </td>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem=>item.Usuario.foto)" class="img-responsive" width="60" height="60">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.calificacion_alumno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fecha_registro)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

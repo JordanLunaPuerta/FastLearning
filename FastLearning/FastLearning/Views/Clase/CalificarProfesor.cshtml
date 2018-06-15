@@ -1,0 +1,38 @@
+﻿@model FastLearning.Models.ClaseUsuario
+<hr />
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id_clase)
+    @Html.HiddenFor(model => model.id_usuario)
+
+    <div class="form-group container">
+        @Html.Label("Profesor:", htmlAttributes: new { @class = "control-label" })
+        <br />
+        <div class="">
+            @Html.DisplayFor(model => model.Clase.Habilidad.Usuario.nombres, new { htmlAttributes = new { @class = "form-control" } }) @Html.DisplayFor(model => model.Clase.Habilidad.Usuario.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <br />
+        @Html.Label("Clase:", htmlAttributes: new { @class = "control-label " })
+        <br />
+        <div class="">
+            @Html.DisplayFor(model => model.Clase.Habilidad.Tema.nombre, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <br />
+        @Html.Label("Valoración:", htmlAttributes: new { @class = "control-label " })
+        <br />
+        <div class="">
+            @Html.EditorFor(model => model.calificacion_profesor, new { htmlAttributes = new { @class = "form-control", min = "1", max = "10" } })
+            @Html.ValidationMessageFor(model => model.calificacion_profesor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+<hr />
+    <div class="form-group">
+        <div class="col-md-offset-9 col-md-2">
+            <input type="submit" value="Calificar" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+

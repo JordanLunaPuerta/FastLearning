@@ -1,0 +1,106 @@
+﻿@model FastLearning.Models.Usuario
+@{
+    ViewBag.Title = "Perfil";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+<h1 class="col-md-12"></h1>
+
+<div class="container col-xs-12 col-md-offset-1 col-md-10">
+    <div class="card table-bordered" style="width: auto; height:auto;background: rgba(255, 255, 255, 0.80);border-color:darkturquoise">
+        <div class="card-body" style="padding-right:3rem; padding-left:3rem">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(model=>model.foto)
+                <h2 style="font-weight:bold">Mi Perfil</h2>
+                <div class="container col-md-4">
+                    <h1 class="col-md-12"></h1>
+                    <img src="@ViewBag.Foto" class="img-circle col-md-12 col-xs-12">
+                    <h1 class="col-md-12"></h1>
+                    <div class="container col-md-6">
+                        <label class="control-label col-md-12" style="font-size:small ; text-align:center">Valoración como alumno</label>
+                        <div class="col-md-12" style="text-align:center">
+                            @Html.DisplayFor(model => model.calificacion_alumno, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="container col-md-6">
+                        <label class="control-label col-md-12" style="font-size:small ; text-align:center">Valoración como profesor</label>
+                        <div class="col-md-12" style="text-align:center">
+                            @Html.DisplayFor(model => model.calificacion_profesor, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <label class="control-label col-md-12" style="font-size:15px ;text-align:center">Clases dictadas finalizadas</label>
+                    <div class="col-md-12" style="font-size:small; text-align:center">
+                        @ViewBag.Clases
+                    </div>
+                    <center>
+                        <label class="control-label col-md-12" style="font-size:40px ;text-align:center">Puntos</label>
+                    </center>                  
+                    <div class="col-md-12" style="font-size:xx-large; text-align:center">
+                        @Html.DisplayFor(model => model.puntos, new { @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="container col-md-8">
+                    <div class="form-horizontal">
+                        <h1 class="col-md-12"></h1>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.id)
+                        <div class="form-group">
+                            <label class="control-label col-md-6">Nombres:</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.nombres, new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-6">Apellidos:</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.apellidos, new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-6">Celular:</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.telefono, new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-6">Email:</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.email, new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-6">Contraseña:</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.contrasena, new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-6">Fecha de registro:</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.fecha_registro, new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(model => model.fecha_registro, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div>
+               <button class="btn btn-primary col-md-offset-10" onclick="location.href='@Url.Action("EditarPerfil","Usuario", new { id = Model.id })'">Editar Perfil</button>
+            </div>
+            <div class="form-group">
+                <h1 class="col-md-12"></h1>
+            </div>
+        </div>
+    </div>
+</div>

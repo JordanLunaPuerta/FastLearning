@@ -1,0 +1,114 @@
+﻿@model FastLearning.Models.Usuario
+
+@{
+    /**/
+
+    ViewBag.Title = "RegistrarUsuario";
+    Layout = "~/Views/Shared/_LayoutInicio.cshtml";
+}
+<h1 class="col-md-12"></h1>
+<h1 class="col-md-12"></h1>
+<h1 class="col-md-12"></h1>
+<div class="container col-md-12">
+    <div class="col-md-8" style="color:white">
+        <div class="col-md-12">
+            <h1 style="text-align:center">FastLearning</h1>
+            <p style="font-size:large">Aplicación que te permitirá encontrar y enseñar de manera presencial, clases segun tus necesidades de aprendizaje</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Busqueda rápida</h3>
+                <p>
+                    De una manera rápida y sencilla, FastLearning te permitira encontrar las clases que tu estas buscando para aprender con profesores calificados por los porpios usuarios.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h3>Brinda tus conocimientos</h3>
+                <p>
+                    Puedes crear clases segun tus conocimientos en distintos temas para enseñar a otros usuarios que lo necesiten.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h3>Califica la calidad de enseñanza</h3>
+                <p>
+                    Despues de que termines las clases en las que te inscribiste, puedes calificar a los profesores, para que asi los demas usuarios tengan una refencia de la calidad de enseñanza de los profesores.
+                </p>
+            </div>
+        </div>
+    </div>
+    <center>
+        <div class="col-md-4">
+            <div class="container card" style="width: auto; height:auto;background: rgba(255, 255, 255, 0.25);color:white">
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        <h2 style=" text-align:center">Registrarse</h2>
+                        <h1 class="col-md-12"></h1>
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.nombres, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "true", @pattern = "[A-Z a-zsáéíóú]+", @title = "Solo se permiten letras", @placeholder = "Nombres" } })
+                                    @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "true", @pattern = "[A-Z a-zsáéíóú]+", @title = "Solo se permiten letras", @placeholder = "Apellidos" } })
+                                    @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @type = "email", @required = "true", @placeholder = "Email" } })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.contrasena, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "true", @placeholder = "Contraseña" } })
+                                    @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.confirmar_contrasena, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "true", @placeholder = "Confirmar contraseña" } })
+                                    @Html.ValidationMessageFor(model => model.confirmar_contrasena, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 ">
+                                    <input type="submit" value="Registrar" class="btn btn-primary btn-block" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <h4 class="text-danger" style="font-weight:bold">@ViewBag.Duplicado</h4>
+                                    <h4 class="text-success" style="font-weight:bold">@ViewBag.Registrado</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <div style="text-align:center">
+                        ¿Ya tienes una cuenta? Inicia Sesión @Html.ActionLink("aquí", "IniciarSesion")
+                    </div>
+                    <div class="form-group">
+                        <h1 class="col-md-12"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+</div>
+<div class="form-group">
+    <h1 class="col-md-12"></h1>
+</div>
+<div class="form-group">
+    <h1 class="col-md-12"></h1>
+</div>

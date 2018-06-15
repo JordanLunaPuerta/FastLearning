@@ -1,0 +1,21 @@
+﻿
+@using (Html.BeginForm())
+{
+    <h5 style="text-align:left;font-size:small">¿Esta Seguro de incribirse a esta clase?</h5>
+    <hr />
+    <h5 style="text-align:left;font-size:small">Utilize uno de sus descuentos (Opcional):</h5>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.DropDownList("id_descuento_usuario", ViewBag.Descuentos as SelectList, "", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-9 col-md-1">
+                <input type="submit" value="Inscribirse" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+

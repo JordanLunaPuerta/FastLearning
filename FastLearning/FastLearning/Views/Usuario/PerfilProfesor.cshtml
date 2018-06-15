@@ -1,0 +1,63 @@
+﻿@model FastLearning.Models.Usuario
+<hr />
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.foto)
+        <img src="@ViewBag.Foto" class="img-circle" width="200" height="200" style="margin-left:5rem">
+        <br />
+        <br />
+        <label class="control-label" >Valoración como alumno</label>
+        <div class="">
+            @Html.DisplayFor(model => model.calificacion_alumno, new { @class = "form-control" })
+        </div>
+        <label class="control-label ">Valoración como profesor</label>
+        <div class="">
+            @Html.DisplayFor(model => model.calificacion_profesor, new { @class = "form-control" })
+        </div>
+        <label class="control-label">Clases dictadas finalizadas</label>
+        <div class="">
+            @ViewBag.Clases
+        </div>
+        <label class="control-label">Puntos</label>
+        <div class="">
+            @Html.DisplayFor(model => model.puntos, new { @class = "form-control" })
+        </div>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+            <div class="form-group">
+                <label class="control-label ">Nombres:</label>
+                <div class="">
+                    @Html.TextBoxFor(model => model.nombres, new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessageFor(model => model.nombres, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Apellidos:</label>
+                <div class="">
+                    @Html.TextBoxFor(model => model.apellidos, new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Celular:</label>
+                <div class="">
+                    @Html.TextBoxFor(model => model.telefono, new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Email:</label>
+                <div class="">
+                    @Html.TextBoxFor(model => model.email, new { @class = "form-control", @readonly = "true" })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />

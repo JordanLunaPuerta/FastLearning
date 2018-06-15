@@ -1,0 +1,118 @@
+﻿@model FastLearning.Models.Clase
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_LayoutPrincipal.cshtml";
+}
+<h1 class="col-md-12"></h1>
+
+<h2 style="text-align:center;color:white">Clase de @ViewBag.clase</h2>
+<h1 class="col-md-12"></h1>
+<div class="container">
+    <div class="card table-bordered" style="width: auto; height:auto;background: rgba(255, 255, 255, 0.80);border-color:darkturquoise">
+        <div>
+            <h1 class="col-md-12"></h1>
+            <h3 style="text-align:center; font-weight:bold" class="text-success">@ViewBag.Error</h3>
+            <div class="container col-md-6">
+                <center>
+                    <img src="@ViewBag.Foto" class="img-rounded" width="200" height="200">
+                </center>
+            </div>
+            <div class="container col-md-6">
+                <div class="form-group">
+                    <h4 class="control-label col-md-6" style="font-weight: bold">Profesor:</h4>
+                    <h4 class="control-label col-md-6" style="text-align:left">@Html.DisplayFor(model => model.Habilidad.Usuario.nombres) @Html.DisplayFor(model => model.Habilidad.Usuario.apellidos)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-6" style="font-weight: bold">Calificación:</h4>
+                    <h4 class="control-label col-md-6" style="text-align:left">@Html.DisplayFor(model => model.Habilidad.Usuario.calificacion_profesor)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-6" style="font-weight: bold">Clases dictadas finalizadas:</h4>
+                    <h4 class="control-label col-md-6" style="text-align:left">@ViewBag.Clases</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-6" style="font-weight: bold">Nivel de habilidad:</h4>
+                    <h4 class="control-label col-md-6" style="text-align:left">@Html.DisplayFor(model => model.Habilidad.Nivel.descripcion)</h4>
+                </div>
+            </div>
+            <h1 class="col-md-12"></h1>
+            <div class="container col-md-12">
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Descripción:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.descripcion)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Precio:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">S/ @Html.DisplayFor(model => model.precio)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Lugar:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.lugar)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Día:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.dia)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Hora inicio:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.hora_inicial)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Hora fin:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.hora_final)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Fecha de inicio:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.fecha_inicial)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Fecha de fin:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.fecha_final)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Vacantes:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.vacantes)</h4>
+                </div>
+                <div class="form-group">
+                    <h4 class="control-label col-md-3" style="font-weight: bold">Número de inscritos:</h4>
+                    <h4 class="control-label col-md-9" style="text-align:left">@Html.DisplayFor(model => model.ClaseUsuario.Count)</h4>
+                </div>
+            </div>
+            <h1 class="col-md-12"></h1>
+            <div class="form-group">
+                <div>
+                    <button type="button" class="btnInscripcionClase btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#myModal" data-id="@Model.id">
+                        Inscribirse a clase
+                    </button>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background: rgba(10, 0, 0, 0.90)">
+                                    <h5 class="modal-title col-md-11" id="exampleModalLabel" style="text-align:initial;color:white">
+                                        Inscripción a curso de @ViewBag.clase
+                                    </h5>
+                                    <button type="button" class="close col-md-1" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" style="color:white">&times;</span>
+                                    </button>
+                                    <br />
+                                </div>
+                                <div class="modal-body">
+                                    <div id="modal-content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <center>
+                    <button class="btn btn-default" onclick="location.href='@Url.Action("Index","Clase")'">Regresar a lista</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/InscripcionClase/Inscripcion-clase.js"></script>

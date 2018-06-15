@@ -1,0 +1,43 @@
+﻿@model FastLearning.Models.ClaseUsuario
+<hr />
+@using (Html.BeginForm())
+{   
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label class="control-label col-md-4">Nombres:</label>
+        <label class="control-label col-md-4" style="font-weight: normal; text-align:left">@Html.DisplayFor(model => model.Usuario.nombres) @Html.DisplayFor(model => model.Usuario.apellidos)</label>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4">Clase:</label>
+        <label class="control-label col-md-4" style="font-weight: normal; text-align:left">@Html.DisplayFor(model => model.Clase.Habilidad.Tema.nombre)</label>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4">Profesor:</label>
+        <label class="control-label col-md-4" style="font-weight: normal; text-align:left">@Html.DisplayFor(model => model.Clase.Habilidad.Usuario.nombres) @Html.DisplayFor(model => model.Clase.Habilidad.Usuario.apellidos)</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-4">Fecha de inscripción:</label>
+        <label class="control-label col-md-4" style="font-weight: normal; text-align:left">@Html.DisplayFor(model => model.Pago.fecha_registro)</label>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4">Monto inicial:</label>
+        <label class="control-label col-md-4" style="font-weight: normal; text-align:left">S/ @Html.DisplayFor(model => model.Pago.monto_inicial)</label>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4">Descuento:</label>
+        <label class="control-label col-md-4" style="font-weight: normal; text-align:left">@Html.DisplayFor(model => model.Pago.DescuentoUsuario.Descuento.nombre)</label>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-4">Monto final:</label>
+        <label class="control-label col-md-4" style="font-weight: normal; text-align:left">S/ @Html.DisplayFor(model => model.Pago.monto_final)</label>
+    </div>
+</div>
+}
+<hr />
